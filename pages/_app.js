@@ -1,7 +1,17 @@
-import '../styles/globals.css'
+// Problem that this file solves - necessity of adding "Layout" component with shared navigation
+// to all other pages, that can be a lot
+// This file acts as the Application Root component, that affects all pages components
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+import '../styles/globals.css'
+import Layout from "../components/layout/Layout";
+
+function MyApp({Component, pageProps}) {
+    // <Component> - at the end will be our page Component, for each of the pages
+    return (
+        <Layout>
+            <Component {...pageProps} />
+        </Layout>
+    )
 }
 
 export default MyApp

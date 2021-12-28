@@ -1,0 +1,12 @@
+/*
+css modules are supported by next.js out of the box
+when you import this file to JS file - all classes from here are converted to Object properties
+*/
+
+.detail {
+    text-align: center;
+}
+
+.detail img{
+    width: 100%;
+}

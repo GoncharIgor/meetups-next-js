@@ -1,34 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## KEy benefits:
+- SEO
+- Server-side rendering: renders HTML draft first, then rehydtares the page with JS code, adding logics
+- providing initial HTML - is super fast: HTML is cheaper than JS
+- server capabilities: possibility to interact with DB and file system
+- file-based routing
 
-## Getting Started
+## css modules
+Uses css modules by default:
+A CSS Module is a CSS file in which all class names and animation names are scoped locally
 
-First, run the development server:
+```javascript
+import styles from "./style.css";
+// import { className } from "./style.css";
 
-```bash
-npm run dev
-# or
-yarn dev
+element.innerHTML = '<div class="' + styles.className + '">';
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Initial Rendering
+Next JS returns static HTML - the result of first components rendering
+So, if you have useEffect() hook that makes call to BE, then no server data will be rendered in the html
+Thus, static <ul> will be rendered, but will all its missing <li> tags
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Solutions:
+- static generation (preferable to use) - every time we have changes on BE - we need to re-build the app and re-deploy it. 
+Good when pages seldom updated - e.g: personal blog
+- Server-side rendering
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## API routes
+next.js will take all files inside "pages/api" and will transform it to "api" routes
+they will be targetted by requests and will both: receive and return JSONs

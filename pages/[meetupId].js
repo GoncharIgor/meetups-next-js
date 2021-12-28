@@ -34,9 +34,12 @@ export async function getStaticPaths() {
     await client.close();
 
     return {
-        fallback: false, // fallback: false - means we have listed ALL the supported paths params IDs. 404 - for not existing url param
+        fallback: 'blocking',
+        // fallback: false - means we have listed ALL the supported paths params IDs. 404 - for not existing url param
         // if fallback: true, - not 404 for not existing url param, but next.js will try to generate page with not existing param value on a fly
         // fallback: true - good for PRE-GENERATING the most visited pages, and giving possibility for server to generate less visited ones
+        // difference between 'blocking' and 'true' - true will give empty page first -> then generate new page -> render it (you need loading spinner)
+        // 'blocking' - will wait for new page to be generated and only then served (no spinner)
 
         paths: meetups.map(meetup => ({params: {meetupId: meetup._id.toString()}}))
         /*

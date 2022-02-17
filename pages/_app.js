@@ -2,6 +2,8 @@
 // to all other pages, that can be a lot
 // This file acts as the Application Root component, that affects all pages components
 
+// acts the same as: "wrapPageElement" in Gatsby "gatsby-browser.js"
+
 import '../styles/globals.css'
 import Layout from "../components/layout/Layout";
 

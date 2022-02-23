@@ -6,8 +6,20 @@
 - file-based routing
 
 ## Under the hood:
-- Rust compiler instead of JS one (it replaces Babel )
+- Rust compiler instead of JS one (it replaces Babel)
 - uses http streaming for serverComponents (progressive SSR). For server component - you indicate `server` in comp. name
+
+## Server component
+Are always rendered on the server. These are likely components that are fetching some data from your backend
+Whenever these components need to be rerendered, they are refetched from the server and merged into the existing, client-side React component tree. 
+What's cool about this is client state is preserved even though we're refetching parts of the view from the server.
+
+- Comp. is rendered on the server and being sent to client
+- client is aware about the server components
+- since component is on server, it can make DB or file system calls
+- since HTML result is returned, and not JS - it means we can safely store credentials on the server
+- better performance (CPU and network)
+- if some 3-rp party os needed only in server component - this library won't be delivered to client
 
 ## New features in v.12:
 - supports in `next.config.js`: concurrentFeatures and serverComponents
@@ -16,6 +28,10 @@
 `import axios from 'https://...'`
 - or import images from url:
 `import logo from 'https://...'`
+
+## SSG vs SSR
+- getStaticProps - for SSG
+- getServerSideProps - for SSR
 
 ## Initial Rendering
 Next JS returns static HTML - the result of first components rendering

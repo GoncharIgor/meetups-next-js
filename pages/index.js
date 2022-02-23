@@ -7,7 +7,7 @@ import MeetupList from "../components/meetups/MeetupList";
 // props - passed from getStaticProps() f()
 const HomePage = (props) => {
     /*
-    If we use this approach, the resulted HTML will be rendered without BE data
+    If we use simple "useEffect()" approach, the resulted HTML will be rendered without BE data
     BE data will be sent on the 2-nd component render. It will be not visible by SEO
     solution - to use getStaticProps() f()
 
@@ -70,10 +70,11 @@ export async function getStaticProps() {
 
 export default HomePage;
 
+// getStaticProps - it's Static Site Generation
 
-// if we want not to regenerate page every number of seconds, but to do it every time on request
-// on contrary to getStaticProps(), this f() will not be run during build process
-// but on the server, after the deployment
+// SSR:
+// if we want not to regenerate page every number of seconds, but to do it every time on request, on contrary to getStaticProps()
+// getServerSideProps() - this f() will not be run during build process, but on the server, after the deployment
 // pros - page is being re-generated on each request
 // cons - it takes time to generate page
 // good when your data changes a couple of times per second; or you need access to request object, for example for auth

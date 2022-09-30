@@ -68,6 +68,8 @@ element.innerHTML = '<div class="' + styles.className + '">';
 ```
 
 For css re-usage from another module:
+    
+in your Home.module.css file:
 ```css
 .component-class {
     composes: header-color from "AnotherModule.module.css"

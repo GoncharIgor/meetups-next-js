@@ -1,6 +1,7 @@
 import {MongoClient} from 'mongodb';
 
 // this code runs only on server and is never exposed to the client, so we can store creds
+// handler - reserved name
 async function handler(req, res) {
     if (req.method === 'POST') {
         const data = req.body;
@@ -16,6 +17,10 @@ async function handler(req, res) {
         await client.close(); // close DB connection
 
         res.status(201).json({message: 'New meetup added'});
+    }
+
+    if (req.method === 'GET') {
+        res.status(200).json({message: 'Health check'});
     }
 }
 

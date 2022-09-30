@@ -11,3 +11,7 @@ function Layout(props) {
 }
 
 export default Layout;
+
+// For multiple layouts:
+// https://nextjs.org/docs/basic-features/layouts#per-page-layouts
+// add a property "getLayout" to your page (in "pages" folder)

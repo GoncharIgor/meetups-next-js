@@ -31,13 +31,17 @@ const HomePage = (props) => {
 };
 
 /*
+getStaticProps - reserved f() name
 this f() sends data to static HTML, after data was received from BE.
 It will result HTML, that sent to client, to also have data from BE on initial rendering
-getStaticProps - reserved f() name
+
 this f() works only in PAGE component files (in "pages" folder), not in other components in "components" folder
-next.js will execute this f() during pre-rendering process, thus it won't directly call "HomePage" component f()
+next.js will execute this f() during pre-rendering process at build time and lets you pass fetched data,
+thus it won't directly call "HomePage" component f()
 it will call "getStaticProps", before calling component f()
 this code is not executed on the server, but during the build process
+
+This function gets called at build time and lets you pass fetched data to the page's props
 */
 export async function getStaticProps() {
     // we could use http request to BE to fetch data. This code runs on the server
@@ -71,6 +75,10 @@ export async function getStaticProps() {
 export default HomePage;
 
 // getStaticProps - it's Static Site Generation
+// getStaticPaths - it's Static Site Generation
+// everything that has word "static" - is run during build time for generating stativ pages
+// Static pages - generated on "next build". These HTMLs WILL THEN BE REUSED ON EACH REQUEST. It can be cached by a CDN
+// runs on the server and never on the client - it is removed from the client-side bundle
 
 // SSR:
 // if we want not to regenerate page every number of seconds, but to do it every time on request, on contrary to getStaticProps()
@@ -94,3 +102,8 @@ export async function getServerSideProps(context) {
         },
     }
 }*/
+
+// getServerSideProps - can be run only from pages, not components
+// when to use:
+// - really dynamic data that changes often
+// when you need properties to be validated on server, like: authorization headers or geo location

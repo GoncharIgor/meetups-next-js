@@ -1,9 +1,12 @@
 import { useRef } from 'react';
+import {useRouter} from "next/router";
 
 import Card from '../ui/Card';
 import classes from './NewMeetupForm.module.css';
 
 function NewMeetupForm(props) {
+  const router = useRouter();
+
   const titleInputRef = useRef();
   const imageInputRef = useRef();
   const addressInputRef = useRef();
@@ -27,11 +30,14 @@ function NewMeetupForm(props) {
     props.onAddMeetup(meetupData);
   }
 
+  const titleLabel = router.locale === 'ru-RU' ? 'Новый Митап' : 'Meetup Title';
+  // to access russian form, we need to go to page: http://localhost:3000/ru-RU/new-meetup
+
   return (
     <Card>
       <form className={classes.form} onSubmit={submitHandler}>
         <div className={classes.control}>
-          <label htmlFor='title'>Meetup Title</label>
+          <label htmlFor='title'>{titleLabel}</label>
           <input type='text' required id='title' ref={titleInputRef} />
         </div>
         <div className={classes.control}>

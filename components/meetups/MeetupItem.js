@@ -30,3 +30,9 @@ function MeetupItem(props) {
 }
 
 export default MeetupItem;
+
+// router.push vs <Link>
+// router.push('/push') behaves similarly to window.location. It does not create a <a> tag - not good for SEO
+// <Link> will create a <a> tag
+// You should be using <Link> throughout all your website,
+// and use router.push for places where you need redirect in order to retain the behaviour of a Single Page App

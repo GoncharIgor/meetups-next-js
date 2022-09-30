@@ -17,3 +17,8 @@ function MyApp({Component, pageProps}) {
 }
 
 export default MyApp
+
+// it can be also used for:
+// - Keeping state when navigating pages
+// - Inject additional data into pages
+// - adding global css

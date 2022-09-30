@@ -21,7 +21,9 @@ const MeetupDetails = (props) => {
 };
 
 // this f() is needed when you use getStaticProps() inside [dynamic] pages
-// it'll be run before getStaticProps()
+// it'll be run before getStaticProps(), at build time -> generates 10 static pages
+// getStaticPaths - basically the list of all dynamic static pages to be created
+// getStaticProps - runs separately per specific page
 export async function getStaticPaths() {
     const client = await MongoClient.connect('mongodb+srv://igorgo:testpass@cluster0.80g4m.mongodb.net/meetups?retryWrites=true&w=majority');
     const db = client.db();
@@ -52,11 +54,12 @@ export async function getStaticPaths() {
     }
 }
 
+// also runs during build time, but per each page separately
 export async function getStaticProps(context) {
     // to get meetupId - useRouter() hook can be only used inside the Component, but not in the getStaticProps() f()
     // then we need to use "context"
 
-    const meetupId = context.params.meetupId; // meetupId - from file name
+    const meetupId = context.params.meetupId; // meetupId - from file name, it's created by "getStaticPaths" in paths.params
 
     const client = await MongoClient.connect('mongodb+srv://igorgo:testpass@cluster0.80g4m.mongodb.net/meetups?retryWrites=true&w=majority');
     const db = client.db();
@@ -75,3 +78,30 @@ export async function getStaticProps(context) {
 }
 
 export default MeetupDetails;
+
+
+// Dynamic examples:
+// pages/post/[pid].js
+
+// with query params:
+// /post/abc?foo=bar  =>  { "foo": "bar", "pid": "abc" }
+
+//  route parameters will override query parameters with the same name:
+// /post/abc?pid=123  =>  { "pid": "abc" }
+
+// Multiple dynamic route segments:
+// pages/post/[pid]/[comment].js
+// /post/abc/a-comment  =>  { "pid": "abc", "comment": "a-comment" }
+
+
+// <Link href="/post/[id]/[comment]" as={`/post/111/first-comment`}>
+//   <a>First comment</a>
+// </Link>
+
+
+// Catch all routes:
+// pages/post/[...slug].js => /post/a,  + /post/a/b  + /post/a/b/c + ....
+
+
+// Optional Catch all routes: [[...slug]]
+// ngrx or rxjs - ofType operator ???

@@ -52,11 +52,13 @@ they will be targetted by requests and will both: receive and return JSONs
 
 # Styles management
 1. global css:
+   
 Cons:
 - unscoped and hard to maintain. Solution - BEM approach.
 - Big not optimized bundle
 
 2. css modules
+   
 Uses css modules by default:
 A CSS Module is a CSS file in which all class names and animation names are scoped locally and used in individual component
 

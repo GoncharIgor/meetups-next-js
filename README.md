@@ -9,6 +9,7 @@
 - Rust compiler instead of JS one (it replaces Babel) - 17x times faster than Babel. To convert TS and JSX to plain JS
 - uses http streaming (like websocket, but comparable to walkie talkie - 1 way direction at a time) for serverComponents (progressive SSR). For server component - you indicate `server` in comp. name
 - Bundler - Turbopack (beta) is an incremental bundler optimized for JS and TS, written in Rust, and built into Next.js.
+- Out of the box, with no configuration, Next.js compiles CSS using PostCSS.
 
 ## Server component
 Are always rendered on the server. These are likely components that are fetching some data from your backend
